@@ -27,20 +27,29 @@ namespace TestApplication
             this.LadeStammdaten();
             InitializeComponent();
         }
-
+        
+        
+        // neu --> führt speichern aus wenn Fenster geschlossen wird, also man auf X drückt
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            this.StammdatenSpeichern();
+        }
+        
+        // überarbeitet
         public void LadeStammdaten()
         {
-             foreach(DataRow row in this.table.Rows)
-             { 
-                 ArtikelDTO artikel = new ArtikelDTO();
-                 
-                 artikel.ID = row["ID"];
-                 artikel.Name = row["Name"];
-                 artikel.Preis = row["Preis"];
-                 artikel.Description = row["Description"];
-                 
-                  this.Stammdaten.Add(artikel);
-             }
+            foreach (DataRow row in this.table.Rows)
+            {
+                ArtikelDTO artikel = new ArtikelDTO();
+
+                artikel.ID = row["ID"].ToString();
+                artikel.Name = row["Name"].ToString();
+                artikel.Preis = float.Parse(row["Preis"].ToString());
+                artikel.Description = row["Description"].ToString();
+
+                this.Stammdaten.Add(artikel);
+            }
+
         }
         
         public void StammdatenSpeichern()
