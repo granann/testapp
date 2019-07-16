@@ -17,6 +17,10 @@ namespace TestApplication
 
         private List<ArtikelDTO> Stammdaten = new List<ArtikelDTO>();
         private List<ArtikelDataDTO> Artikelliste = new List<ArtikelDataDTO>();
+        
+        // Vllt die datatable hier definieren
+        //  DataTable table = new DataTable();
+        // dann kann man sie unten benutzen
 
         public Form1()
         {
@@ -34,6 +38,7 @@ namespace TestApplication
                 foreach (ArtikelDTO artikel in this.Stammdaten)
                 {
                 
+                   // --> DataRow dr = this.table.NewRow();
                     DataRow dr = table.NewRow();
 
                     dr[0] = ID;
