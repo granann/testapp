@@ -28,6 +28,14 @@ namespace TestApplication
         {
 
         }
+        
+        public void StammdatenSpeichern()
+        {
+                foreach (ArtikelDTO artikel in this.Stammdaten)
+                {
+                    
+                }
+        }
 
         public void ResetFelder()
         {
