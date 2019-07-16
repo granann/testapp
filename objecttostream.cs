@@ -66,3 +66,13 @@ protected void Button1_Click(object sender, EventArgs e)
     {
     }
 }
+
+
+DataRow dr = table.NewRow();
+
+dr[0] = ID;
+dr[1] = artikel.Name;
+dr[2] = artikel.Preis;
+dr[3] = artikel.Description;
+
+table.Rows.Add(dr);
