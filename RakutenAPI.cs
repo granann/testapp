@@ -43,7 +43,9 @@ namespace TestApplication
 
         public string ArtikelAnlegen(ArtikelDataDTO artikel) 
         {
-            byte[] data = Encoding.ASCII.GetBytes(artikel);
+            byte[] data = Encoding.UTF8.GetBytes(artikel);
+            // oder byte[] objBytes = Encoding.UTF8.GetBytes(artikel.ToString());
+            // oder byte[] data = Encoding.ASCII.GetBytes(artikel);
 
             myHttpWebRequest.ContentType = "application/x-www-form-urlencoded";
             myHttpWebRequest.ContentLength = data.Length;
