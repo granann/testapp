@@ -51,7 +51,7 @@ namespace TestApplication
                    // --> DataRow dr = this.table.NewRow();
                     DataRow dr = table.NewRow();
 
-                    dr[0] = ID;
+                    dr[0] = artikel.ID;
                     dr[1] = artikel.Name;
                     dr[2] = artikel.Preis;
                     dr[3] = artikel.Description;
@@ -80,10 +80,12 @@ namespace TestApplication
             ArtikelDataDTO artikeldata = new ArtikelDataDTO();
             ArtikelDTO artikel = new ArtikelDTO();
 
+            artikel.ID = textBox4.Text;
             artikel.Name = textBox1.Text;
             artikel.Preis = float.Parse(textBox2.Text);
             artikel.Description = textBox3.Text;
 
+            artikeldata.ID = textBox4.Text;
             artikeldata.Name = textBox1.Text;
             artikeldata.Preis = float.Parse(textBox2.Text);
             artikeldata.Description = textBox3.Text;
