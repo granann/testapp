@@ -60,7 +60,24 @@ namespace TestApplication
                     
                 }
         }
+        
+        // neu
+        public int ArtikelSuchen(string id)
+        {
+            int count = 0;
+            foreach (ArtikelDTO artikel in this.Stammdaten)
+            {
+                if (artikel.ID == id)
+                {
+                    return count;
+                }
 
+                count++;
+            }
+
+            return -1;
+        }
+        
         public void ResetFelder()
         {
             textBox1.Clear();
@@ -80,12 +97,12 @@ namespace TestApplication
             ArtikelDataDTO artikeldata = new ArtikelDataDTO();
             ArtikelDTO artikel = new ArtikelDTO();
 
-            artikel.ID = textBox4.Text;
+            artikel.ID = textBox4.Text; // neu
             artikel.Name = textBox1.Text;
             artikel.Preis = float.Parse(textBox2.Text);
             artikel.Description = textBox3.Text;
 
-            artikeldata.ID = textBox4.Text;
+            artikeldata.ID = textBox4.Text; //neu
             artikeldata.Name = textBox1.Text;
             artikeldata.Preis = float.Parse(textBox2.Text);
             artikeldata.Description = textBox3.Text;
@@ -106,12 +123,15 @@ namespace TestApplication
             ArtikelDataDTO artikeldata = new ArtikelDataDTO();
             ArtikelDTO artikel = new ArtikelDTO();
 
+            artikel.ID = textBox4.Text; //neu
             artikel.Name = textBox1.Text;
             artikel.Preis = float.Parse(textBox2.Text);
             artikel.Description = textBox3.Text;
 
-            this.Stammdaten[int.Parse(textBox4.Text)] = artikel;
+            int artikelID = this.ArtikelSuchen(textBox4.Text); // neu
+            this.Stammdaten[artikelID] = artikel; // neu
 
+            artikeldata.ID = textBox4.Text; //neu
             artikeldata.Name = textBox1.Text;
             artikeldata.Preis = float.Parse(textBox2.Text);
             artikeldata.Description = textBox3.Text;
@@ -129,7 +149,8 @@ namespace TestApplication
         {
             ArtikelDataDTO artikel = new ArtikelDataDTO();
 
-            this.Stammdaten.RemoveAt(int.Parse(textBox4.Text));
+            int artikelID = this.ArtikelSuchen(textBox4.Text); //neu
+            this.Stammdaten.RemoveAt(artikelID); //neu
 
             artikel.Name = textBox1.Text;
             artikel.action = 3;
@@ -181,19 +202,27 @@ namespace TestApplication
                 string t = "";
                 foreach (ArtikelDTO artikel in this.Stammdaten)
                 {
-                    t += String.Format("ID: {0},Name: {1}, Preis: {2}, Beschreibung: {3} \n", count, artikel.Name, artikel.Preis, artikel.Description);
+                    //  neu -> t += String.Format("ID: {0},Name: {1}, Preis: {2}, Beschreibung: {3} \n", artikel.ID, artikel.Name, artikel.Preis, artikel.Description);
+                    /* alt, durch neues ersetzen*/ t += String.Format("ID: {0},Name: {1}, Preis: {2}, Beschreibung: {3} \n", count, artikel.Name, artikel.Preis, artikel.Description);
                     richTextBox1.Text = t;
                     count++;
                 }
             }
             else
             {
+            
+                // neu
+                ArtikelDTO artikel = this.Stammdaten[this.ArtikelSuchen(textBox4.Text)];
+                string t = String.Format("ID: {0}, Name: {1}, Preis: {2}, Beschreibung: {3}", textBox4.Text, artikel.Name, artikel.Preis, artikel.Description);
+                richTextBox1.Text = t;
+                
+                /* alt durch neu ersetzen
                 if (this.Stammdaten.Count >= int.Parse(textBox4.Text))
                 {
                     ArtikelDTO artikel = this.Stammdaten[int.Parse(textBox4.Text)];
                     string t = String.Format("ID: {0}, Name: {1}, Preis: {2}, Beschreibung: {3}", int.Parse(textBox4.Text), artikel.Name, artikel.Preis, artikel.Description);
                     richTextBox1.Text = t;
-                }
+                }*/
             }
 
         }
