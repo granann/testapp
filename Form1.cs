@@ -30,7 +30,17 @@ namespace TestApplication
 
         public void LadeStammdaten()
         {
-
+             foreach(DataRow row in this.table.Rows)
+             { 
+                 ArtikelDTO artikel = new ArtikelDTO();
+                 
+                 artikel.ID = row["ID"];
+                 artikel.Name = row["Name"];
+                 artikel.Preis = row["Preis"];
+                 artikel.Description = row["Description"];
+                 
+                  this.Stammdaten.Add(artikel);
+             }
         }
         
         public void StammdatenSpeichern()
