@@ -30,3 +30,39 @@ void Main()
     }
 
 }
+
+
+protected void Button1_Click(object sender, EventArgs e)
+{
+    UserInputParameters stdObj = new UserInputParameters
+    {
+        AssociateRefId = "323",
+        CpecialLoginId = "a@gmail.com",
+        PartnerId = "aaaa",
+        FirstName = "aaaa",
+        LastName = "bbbb",
+        Comments = "dsada",
+        CreatedDate = "2013-02-25 15:25:47.077",
+        Token = "asdadsadasd"
+    };
+
+    string url = "http://localhost:13384/LinkService.svc/TokenInsertion";
+
+    try
+    {
+        ASCIIEncoding encoding = new ASCIIEncoding();
+        System.Net.WebRequest webReq = System.Net.WebRequest.Create(url);
+        webReq.Method = "POST";
+        webReq.ContentType = "application/json; charset=utf-8";
+        DataContractJsonSerializer ser = new DataContractJsonSerializer(stdObj.GetType());
+        StreamWriter writer = new StreamWriter(webReq.GetRequestStream());
+        writer.Close();
+        webReq.Headers.Add("URL", "http://localhost:13381/IntegrationCheck/Default.aspx");
+        System.Net.WebResponse webResp = webReq.GetResponse();
+        System.IO.StreamReader sr = new System.IO.StreamReader(webResp.GetResponseStream());
+        string s = sr.ReadToEnd().Trim();
+    }
+    catch (Exception ex)
+    {
+    }
+}
