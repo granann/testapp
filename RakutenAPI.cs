@@ -43,7 +43,16 @@ namespace TestApplication
 
         public string ArtikelAnlegen(ArtikelDataDTO artikel) 
         {
-            // API Request an Rakuten --> artikel anlegena
+            byte[] data = Encoding.ASCII.GetBytes(artikel);
+
+            myHttpWebRequest.ContentType = "application/x-www-form-urlencoded";
+            myHttpWebRequest.ContentLength = data.Length;
+
+            Stream requestStream = myHttpWebRequest.GetRequestStream();
+            requestStream.Write(data, 0, data.Length);
+            requestStream.Close();
+            
+            
             return "";
         }
 
